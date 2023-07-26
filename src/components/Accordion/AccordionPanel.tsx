@@ -31,7 +31,7 @@ export default function AccordionPanel({ isActive, show, img, title, text }: Acc
                     }
                 </div>
             </div>
-            <div className={`${!isActive && 'h-0 md:h-auto'} ${isActive && 'h-32 md:h-auto'} overflow-y-auto transition-all duration-200 ease-in`}>
+            <div className={`${isActive ? "h-32" : "h-0"} md:h-auto  overflow-y-auto transition-all duration-200 ease-in`}>
                 <h2 className="text-lg font-bold">{title}</h2>
                 <p>{text}</p>
             </div>
