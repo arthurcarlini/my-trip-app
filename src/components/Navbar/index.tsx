@@ -1,6 +1,6 @@
 import NavigationLink from "@/components/Navbar/navigationLink"
 
-import { MenuRoundedIcon } from "@/icons"
+import { MenuRoundedIcon } from "@/components/ui/icons"
 
 export default function Navbar() {
     return (

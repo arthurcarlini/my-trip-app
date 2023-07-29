@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react"
 
 import Image from "next/image"
 
-import { ExpandMoreRoundedIcon } from "@/icons"
+import { ExpandMoreRoundedIcon } from "@/components/ui/icons"
 
 interface AccordionPanel {
     isActive: boolean,

@@ -8,7 +8,7 @@ export default function AccordionRoot() {
 
     const image = imageTest
     return (
-        <div className="mt-2 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-2">
+        <div className="mt-2 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-2">
             <AccordionPanel
                 isActive={activeIndex === 0}
                 show={() => setActiveIndex(0)}
@@ -26,6 +26,13 @@ export default function AccordionRoot() {
             <AccordionPanel
                 isActive={activeIndex === 2}
                 show={() => setActiveIndex(2)}
+                img={image}
+                title={"Cinema"}
+                text={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor ipsam asperiores alias illum hic consequatur molestiae quia doloribus architecto minima minus velit, libero ullam enim tenetur perspiciatis sunt labore quidem."}
+            />
+            <AccordionPanel
+                isActive={activeIndex === 3}
+                show={() => setActiveIndex(3)}
                 img={image}
                 title={"Cinema"}
                 text={"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor ipsam asperiores alias illum hic consequatur molestiae quia doloribus architecto minima minus velit, libero ullam enim tenetur perspiciatis sunt labore quidem."}

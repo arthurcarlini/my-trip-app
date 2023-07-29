@@ -1,7 +1,7 @@
 import Map from "../components/map"
 import Slider from "../components/slider"
-import LocationInput from "@/components/locationInput"
 import Accordion from "@/components/Accordion"
+import { Input } from "@/components/Input"
 
 export default function Home() {
   return (
@@ -13,7 +13,11 @@ export default function Home() {
               <h2 className="md:w-2/3 lg:w-1/2 my-2 mx-3 font-bold text-4xl md:text-6xl text-white">Descubra Sua Próxima Jornada</h2>
               <p className="md:w-2/3 lg:w-1/2 my-2 mx-3 md:text-xl text-white">Deixe-nos ajudar com a sua próxima viagem, fornecendo o melhor trajeto disponível com uma lista dos melhores hotéis e restaurantes no seu destino!</p>
             </div>
-            <LocationInput />
+            <Input.Root>
+              <Input.Icon />
+              <Input.TextField />
+              <Input.Button />
+            </Input.Root>
           </div>
         </div>
       </div>
