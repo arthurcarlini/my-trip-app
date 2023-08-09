@@ -1,32 +1,46 @@
 'use client'
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
-import { Loader } from "@googlemaps/js-api-loader"
+import { googleMapsApi } from "@/app/api/googleApi"
 
-const API_KEY = 'AIzaSyBxC2hxuRJ-HjyfgIUKekDIw_ndNOd9yQA'
+interface DestinationInputType {
+    setText: (value: string) => void
+    placeholder: string
+}
 
-export default function DestinationInput() {
+export default function InputTextField({ setText, placeholder }: DestinationInputType) {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
-    const loader = new Loader({
-        apiKey: API_KEY,
-        version: "weekly",
-        libraries: ["places"]
-    })
+    function initAutocomplete(inputElement: HTMLInputElement) {
+        googleMapsApi
+            .importLibrary("places")
+            .then(() => {
+                const autocomplete = new google.maps.places.Autocomplete(inputElement)
+                autocomplete.setFields(["name"])
+                autocomplete.setTypes(["(cities)"])
 
-    loader
-        .importLibrary("places")
-        .then(({ Autocomplete }) => {
-            if (inputRef.current != null) {
-                new Autocomplete(inputRef.current)
-            }
-        })
-        .catch((e) => {
-            console.log(e)
-        })
+                autocomplete.addListener("place_changed", () => {
+                    const placeName = autocomplete.getPlace().name
+                    if (placeName != undefined) {
+                        setText(placeName)
+                    }
+                })
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+    }
+
+    useEffect(() => {
+        if (inputRef.current != null) {
+            initAutocomplete(inputRef.current)
+        }
+    }, [])
+
+
     return (
-        <input ref={inputRef} placeholder="Qual seu destino?" className="grow mx-5 lg:mx-0 text-black text-sm md:text-xl focus:outline-none" type="text" />
+        <input ref={inputRef} placeholder={placeholder} className="grow mx-5 lg:mx-0 text-black text-sm md:text-xl focus:outline-none" type="text" />
     )
 
 }

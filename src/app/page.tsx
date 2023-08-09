@@ -1,9 +1,11 @@
+import CityResume from "@/components/CityResume"
 import Map from "../components/map"
 import Slider from "../components/slider"
 import Accordion from "@/components/Accordion"
 import { Input } from "@/components/Input"
 
 export default function Home() {
+
   return (
     <div>
       <div className="h-screen">
@@ -15,23 +17,21 @@ export default function Home() {
             </div>
             <Input.Root>
               <Input.Icon />
-              <Input.TextField />
+              <Input.ManageState />
               <Input.Button />
             </Input.Root>
           </div>
         </div>
       </div>
+
       <div className="px-2 lg:px-12">
-        <div className="flex flex-col lg:flex-row lg:justify-between mb-5 lg:mb-10">
-          <h2 className="mb-5 font-bold text-2xl lg:text-4xl">Porto Alegre, RS</h2>
-          <p className="lg:w-1/2 lg:font-medium lg:text-lg text-center lg:text-left">Porto Alegre, RS: cidade vibrante às margens do Rio Guaíba, com rica cultura, parques encantadores e gastronomia deliciosa. Mistura de tradição e modernidade, acolhe visitantes com calor humano gaúcho.</p>
-        </div>
+        <CityResume />
         <div className="flex justify-center">
           <Map />
         </div>
         <div className="mt-5">
           <h2 className="font-bold text-2xl">Atrações</h2>
-          <p>Confira algum dos pontos mais visitados em Porto Alegre.</p>
+          <p>Confira algum dos pontos mais visitados em seu destino.</p>
           <Accordion />
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
       <div className="mt-5 p-2 lg:px-12">
         <h2 className="font-bold text-2xl">Restaurantes</h2>
-        <p className="mb-5 lg:mb-0">Aqui estão algumas opções de restaurantes disponíveis para seu passeio.</p>
+        <p className="mb-5 lg:mb-0">Aqui estão algumas opções de restaurantes disponíveis em seu destino.</p>
         <Slider />
       </div>
     </div>
