@@ -3,6 +3,7 @@ import './globals.css'
 import { Cabin, Montserrat } from 'next/font/google'
 
 import Navbar from "@/components/Navbar"
+import { ApiProvider } from "./context/ApiContext"
 
 const cabin = Cabin({
   subsets: ['latin'],
@@ -28,9 +29,9 @@ export default function RootLayout({
     <html lang="pt-br" className={`${cabin.variable} ${montserrat.variable} font-sans`}>
       <body>
         <Navbar />
-        <div>
+        <ApiProvider>
           {children}
-        </div>
+        </ApiProvider>
       </body>
     </html>
   )
