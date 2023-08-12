@@ -40,7 +40,7 @@ export default function InputTextField({ setText, placeholder }: DestinationInpu
 
 
     return (
-        <input ref={inputRef} placeholder={placeholder} className="grow mx-5 lg:mx-0 text-black text-sm md:text-xl focus:outline-none" type="text" />
+        <input ref={inputRef} placeholder={placeholder} className="w-1/2 ml-3 text-black text-sm md:text-xl focus:outline-none" type="text" />
     )
 
 }
