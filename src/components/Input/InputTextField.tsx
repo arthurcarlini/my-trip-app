@@ -1,14 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
-
-import { useApiContext } from "@/app/context/ApiContext"
+import { useEffect, useRef } from "react"
 
 interface DestinationInputType {
     placeholder: string
     onPlacesChange: (value: {
-        lat: number
-        lng: number
+        name: string
+        location: google.maps.LatLngLiteral
     }) => void
 }
 
@@ -31,13 +29,19 @@ export default function InputTextField({ placeholder, onPlacesChange }: Destinat
                 }
 
                 const place = places![0]
+                const cityName = place.name
 
                 const location = {
                     lat: place.geometry?.location?.lat() || 0,
                     lng: place.geometry?.location?.lng() || 0
                 }
-
-                onPlacesChange(location)
+                
+                if (cityName !== undefined) {
+                    onPlacesChange({
+                        name: cityName,
+                        location,
+                    })
+                }
             })
         }
     }

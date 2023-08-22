@@ -3,23 +3,28 @@ import { useState } from "react"
 import { useApiContext } from "@/app/context/ApiContext"
 import InputTextField from "./InputTextField"
 
+interface City {
+    name: string
+    location: google.maps.LatLngLiteral
+}
+
 export default function ManageState() {
 
-    const { setOrigin, setDestination } = useApiContext()
+    const { setOriginCity, setDestinationCity } = useApiContext()
 
-    const [pointA, setPointA] = useState<google.maps.LatLngLiteral | null>(null)
-    const [pointB, setPointB] = useState<google.maps.LatLngLiteral | null>(null)
+    const [pointA, setPointA] = useState({} as City)
+    const [pointB, setPointB] = useState({} as City)
 
-    const setOriginAndDestination = () => {
-        setOrigin(pointA)
-        setDestination(pointB)
+    const handleClick = () => {
+        setOriginCity(pointA)
+        setDestinationCity(pointB)
     }
 
     return (
         <>
             <InputTextField onPlacesChange={setPointA} placeholder="Origem" />
             <InputTextField onPlacesChange={setPointB} placeholder="Destino" />
-            <button onClick={setOriginAndDestination} className="w-16 md:w-20 lg:w-28 h-10 md:h-14 mx-3 rounded-xl bg-blue-500 text-white lg:text-xl">Buscar</button>
+            <button onClick={handleClick} className="w-16 md:w-20 lg:w-28 h-10 md:h-14 mx-3 rounded-xl bg-blue-500 text-white lg:text-xl">Buscar</button>
         </>
     )
 }
