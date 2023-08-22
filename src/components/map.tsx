@@ -14,7 +14,7 @@ export default function Map() {
     const [map, setMap] = useState<google.maps.Map | null>(null)
     const [routes, setRoutes] = useState<google.maps.DirectionsResult | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { origin, destination } = useApiContext()
+    const { originCity, destinationCity } = useApiContext()
 
     useEffect(() => {
         if (containerRef.current !== null) {
@@ -23,10 +23,10 @@ export default function Map() {
     }, [])
 
     useEffect(() => {
-        if (origin && destination !== null) {
-            getRoutes(origin, destination, setRoutes)
+        if (originCity.location && destinationCity.location !== null) {
+            getRoutes(originCity.location, destinationCity.location, setRoutes)
         }
-    }, [origin, destination])
+    }, [originCity, destinationCity])
 
     return (
         <>
