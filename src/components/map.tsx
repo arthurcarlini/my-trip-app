@@ -1,57 +1,82 @@
 'use client'
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
-import { googleMapsApi } from "@/app/api/googleApi"
 import { useApiContext } from "@/app/context/ApiContext"
 
-import RouteRoundedIcon from '@mui/icons-material/RouteRounded'
-import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded'
+const mapOptions = {
+    center: { lat: -23.36, lng: -46.36 },
+    zoom: 10,
+    disableDefaultUI: true
+}
 
 export default function Map() {
-    const MapRef = useRef<HTMLDivElement | null>(null)
-
-    const { origin, destination, isActive } = useApiContext()
-
-    function initMap(mapElement: HTMLDivElement) {
-        googleMapsApi
-            .importLibrary("routes")
-            .then(() => {
-                if (mapElement != null) {
-                    const directionsRenderer = new google.maps.DirectionsRenderer()
-                    const directionsService = new google.maps.DirectionsService()
-
-                    const map = new google.maps.Map(mapElement, {
-                        center: { lat: -23.36, lng: -46.84 },
-                        zoom: 10,
-                    })
-                    directionsRenderer.setMap(map)
-
-                    directionsService.route({
-                        destination,
-                        origin,
-                        travelMode: google.maps.TravelMode.DRIVING,
-                    }, (routes, status) => {
-                        if (status === google.maps.DirectionsStatus.OK) {
-                            directionsRenderer.setDirections(routes)
-                        }
-                    })
-                }
-            })
-    }
+    const [map, setMap] = useState<google.maps.Map | null>(null)
+    const [routes, setRoutes] = useState<google.maps.DirectionsResult | null>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { origin, destination } = useApiContext()
 
     useEffect(() => {
-        if (MapRef.current != null) {
-            initMap(MapRef.current)
+        if (containerRef.current !== null) {
+            setMap(new window.google.maps.Map(containerRef.current, mapOptions))
+        }
+    }, [])
+
+    useEffect(() => {
+        if (origin && destination !== null) {
+            getRoutes(origin, destination, setRoutes)
         }
     }, [origin, destination])
 
-
     return (
-        <div ref={MapRef} className="w-full lg:w-2/3 h-60 md:h-72 lg:h-96 rounded-md flex justify-center relative">
-            <div className="w-1/2 md:w-1/3 h-6 text-xs lg:text-sm text-white flex justify-center rounded-md bg-neutral-500 absolute bottom-3">
-                <div className="mr-5 lg:mr-5 flex items-center"><RouteRoundedIcon />99km</div><div className="flex items-center"><DirectionsCarRoundedIcon />1hr e 30min</div>
-            </div>
-        </div>
+        <>
+            <div ref={containerRef} className="w-full lg:w-2/3 h-60 md:h-72 lg:h-96 rounded-md flex justify-center relative" />
+            {map && routes && <RenderRoutes map={map} routes={routes} />}
+        </>
     )
+}
+
+async function getRoutes(origin: google.maps.LatLngLiteral, destination: google.maps.LatLngLiteral, setRoutes: (value: any) => void) {
+    const request = {
+        origin,
+        destination,
+        travelMode: window.google.maps.TravelMode.DRIVING,
+    }
+
+    const directionsService = new window.google.maps.DirectionsService()
+    directionsService.route(request, (result, status) => {
+        if (status === "OK" && result) {
+            const routes = result
+            setRoutes(routes)
+        }
+    })
+}
+
+interface RenderRoutes {
+    routes: google.maps.DirectionsResult
+    map: google.maps.Map
+}
+
+function RenderRoutes({ routes, map }: RenderRoutes) {
+    const directionsRef = useRef<google.maps.DirectionsRenderer | null>(null)
+    const trackRef = useRef<google.maps.DirectionsResult | null>(null)
+
+    useEffect(() => {
+        if (!directionsRef.current) {
+            directionsRef.current = new window.google.maps.DirectionsRenderer()
+        }
+
+        if (trackRef.current) {
+            directionsRef.current.setMap(null)
+        }
+        directionsRef.current.setMap(map)
+        trackRef.current = routes
+        directionsRef.current.setDirections(trackRef.current)
+
+        return () => {
+            directionsRef.current?.setMap(null)
+        }
+    }, [routes])
+
+    return null
 }

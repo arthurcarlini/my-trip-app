@@ -1,29 +1,27 @@
 'use client'
 
-import { createContext, useState, useContext, ReactNode, MouseEventHandler, Dispatch, SetStateAction } from "react"
-
+import { createContext, useState, useContext, ReactNode } from "react"
+import { Wrapper } from "@googlemaps/react-wrapper"
 
 interface ApiContextType {
-    origin: string
-    setOrigin: (value: string) => void
-    destination: string
-    setDestination: (value: string) => void
-    isActive: boolean
-    setIsActive: (value: boolean) => void
+    origin: google.maps.LatLngLiteral | null
+    setOrigin: (value: google.maps.LatLngLiteral | null) => void
+    destination: google.maps.LatLngLiteral | null
+    setDestination: (value: google.maps.LatLngLiteral | null) => void
 }
 
 const ApiContext = createContext({} as ApiContextType)
 
 export function ApiProvider({ children }: { children: ReactNode }) {
-    const [origin, setOrigin] = useState("")
-    const [destination, setDestination] = useState("")
-    const [isActive, setIsActive] = useState(false)
-
+    const [origin, setOrigin] = useState<google.maps.LatLngLiteral | null>(null)
+    const [destination, setDestination] = useState<google.maps.LatLngLiteral | null>(null)
 
     return (
-        <ApiContext.Provider value={{ origin, setOrigin, destination, setDestination, isActive, setIsActive }}>
-            {children}
-        </ApiContext.Provider>
+        <Wrapper apiKey="AIzaSyBxC2hxuRJ-HjyfgIUKekDIw_ndNOd9yQA" version="weekly" libraries={["places"]}>
+            <ApiContext.Provider value={{ origin, setOrigin, destination, setDestination }}>
+                {children}
+            </ApiContext.Provider>
+        </Wrapper>
     )
 }
 

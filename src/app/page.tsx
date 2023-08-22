@@ -5,7 +5,6 @@ import Accordion from "@/components/Accordion"
 import { Input } from "@/components/Input"
 
 export default function Home() {
-
   return (
     <div>
       <div className="h-screen">
@@ -18,7 +17,6 @@ export default function Home() {
             <Input.Root>
               <Input.Icon />
               <Input.ManageState />
-              <Input.Button />
             </Input.Root>
           </div>
         </div>
