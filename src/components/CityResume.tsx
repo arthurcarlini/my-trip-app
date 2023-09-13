@@ -1,15 +1,17 @@
-'use client'
-import { useApiContext } from "@/app/context/ApiContext"
+"use client"
 
+interface CityResume {
+    placeAddress: string
+}
 
-export default function CityResume() {
-
-    const { destinationCity } = useApiContext()
+export default function CityResume({ placeAddress }: CityResume) {
 
     return (
-        <div className="flex flex-col lg:flex-row lg:justify-between mb-5 lg:mb-10">
-            <h2 className="mb-5 font-bold text-2xl lg:text-4xl">{destinationCity.name}</h2>
-            <p className="lg:w-1/2 lg:font-medium lg:text-lg text-center lg:text-left"></p>
+        <div className="">
+            <h1 className="text-center font-semibold text-2xl mb-2">{placeAddress}</h1>
+            <p className="text-center mb-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt facere beatae, iure dolorem modi ullam libero repellendus, eos deserunt cum quisquam nulla illum architecto. Eaque enim impedit consectetur pariatur veritatis!
+            </p>
         </div>
     )
 }
