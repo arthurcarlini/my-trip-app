@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className={`${cabin.variable} ${montserrat.variable} font-sans`}>
       <body>
-        <Navbar />
         <ApiProvider>
+          <Navbar />
           {children}
         </ApiProvider>
       </body>
-    </html>
+    </html >
   )
 }
