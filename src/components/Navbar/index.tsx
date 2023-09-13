@@ -1,17 +1,41 @@
-import NavigationLink from "@/components/Navbar/navigationLink"
+"use client"
+import { useState } from "react"
+import Link from "next/link"
 
-import { MenuRoundedIcon } from "@/components/ui/icons"
+import { MenuRoundedIcon, SearchRoundedIcon } from "@/components/ui/icons"
+import NavigationLink from "@/components/Navbar/navigationLink"
+import Input from "../Input"
 
 export default function Navbar() {
+    const [show, setShow] = useState(false)
+
     return (
-        <div className="fixed inset-x-0 grid grid-cols-3 items-center z-10 w-full h-16 md:h-20 px-2 lg:px-12 bg-white">
-            <span className="font-montserrat font-bold text-xl md:text-2xl">MyTrip</span>
-            <nav>
+        <div className="sticky top-0 z-10 w-full h-16 md:h-20 px-2 lg:px-12 bg-white">
+            <nav className="flex items-center justify-between h-full">
+                <Link href="/">
+                    <span className="font-montserrat font-bold text-xl md:text-2xl">
+                        MyTrip
+                    </span>
+                </Link>
+
                 <ul className="hidden lg:flex justify-center space-x-7">
                     <NavigationLink navLinks={[{ href: "/", name: "Início" }, { href: "/about", name: "Sobre" }]} />
                 </ul>
+
+                <Input show={show} setShow={setShow} />
+
+                <div className="flex items-center">
+                    <button
+                        onClick={() => setShow(true)}
+                        className="w-10 h-10">
+                        <SearchRoundedIcon />
+                    </button>
+
+                    <button className="w-10 h-10 lg:hidden">
+                        <MenuRoundedIcon className="text-3xl md:text-4xl" />
+                    </button>
+                </div>
             </nav>
-            <button className="lg:hidden justify-self-end"><MenuRoundedIcon className="text-3xl md:text-4xl" /></button>
         </div>
     )
 }
