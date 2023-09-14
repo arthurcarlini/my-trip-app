@@ -9,6 +9,14 @@ import Map from "@/components/Map"
 import Accordion from "@/components/Accordion"
 import { Carousel } from "@/components/Carousel"
 
+interface Place {
+    id: string | undefined
+    name: string | undefined
+    address: string | undefined
+    photos: string | undefined
+    rating: number | undefined
+}
+
 export default function Page() {
     const [originPlaceId, setOriginPlaceId] = useState("")
     const [destinationPlaceId, setDestinationPlaceId] = useState("")
@@ -36,15 +44,9 @@ export default function Page() {
     const divRef = useRef<HTMLDivElement>(null)
     const placeServiceRef = useRef<google.maps.places.PlacesService>()
 
-    interface Place {
-        id: string | undefined
-        name: string | undefined
-        address: string | undefined
-        photos: string | undefined
-        rating: number | undefined
-    }
     const [hotels, setHotels] = useState<Place[]>([])
     const [restaurants, setRestaurants] = useState<Place[]>([])
+    const [touristAttractions, setTouristAttractions] = useState<Place[]>([])
 
     useEffect(() => {
         console.log('chamando initPlaceService')
@@ -76,12 +78,11 @@ export default function Page() {
                         setPlaceAddress(address)
                         getHotelsFromPlaceAddress(address)
                         getRestaurantsFromPlaceAddress(address)
+                        getTouristAttraction(address)
                     }
                 }
             })
         }
-
-
     }, [destinationPlaceId])
 
 
@@ -130,6 +131,30 @@ export default function Page() {
         })
     }
 
+    function getTouristAttraction(address: string) {
+        const request = {
+            query: `Tourist attraction in ${address}`,
+            type: "tourist_attraction"
+        }
+
+        placeServiceRef.current?.textSearch(request, (res, status) => {
+            if (status === "OK" && res) {
+
+                const touristAttractions = res.map((attraction) => {
+                    return {
+                        id: attraction.place_id,
+                        name: attraction.name,
+                        address: attraction.formatted_address,
+                        photos: attraction.photos?.[0].getUrl(),
+                        rating: attraction.rating
+                    }
+                })
+                setTouristAttractions(touristAttractions)
+                console.log(touristAttractions)
+            }
+        })
+    }
+
     return (
         <main>
             <CityResume placeAddress={placeAddress} />
@@ -142,7 +167,7 @@ export default function Page() {
                 <div className="mt-5">
                     <h2 className="font-bold text-2xl">Atrações</h2>
                     <p>Confira algum dos pontos mais visitados em seu destino.</p>
-                    <Accordion />
+                    <Accordion attractions={touristAttractions} />
                 </div>
             </div>
 
