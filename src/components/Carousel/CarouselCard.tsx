@@ -21,7 +21,10 @@ export default function Card({ placeName, placeAddress, photo, rating }: Card) {
                 className="object-cover rounded-md"
             />}
             <div className="absolute top-2 right-2 p-1 flex bg-neutral-500 bg-opacity-70 rounded-md">
-                <StarRateIcon className="text-yellow-500" />{rating}
+                <StarRateIcon className="text-yellow-500" fontSize="small"/>
+                <div className="text-sm">
+                    {rating}
+                </div>
             </div>
             <div className="absolute right-0 left-0 bottom-2 mx-2 p-2 bg-neutral-500 bg-opacity-70 rounded-md">
                 <span className="font-bold md:text-lg">
@@ -30,8 +33,4 @@ export default function Card({ placeName, placeAddress, photo, rating }: Card) {
             </div>
         </a>
     )
-}
-
-function RenderStarRating({ rating }: { rating: number }) {
-
 }
