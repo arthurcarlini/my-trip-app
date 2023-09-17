@@ -42,7 +42,7 @@ export default function Carousel({ children }: Carousel) {
 
     return (
         <div className="flex flex-col">
-            <div className="hidden lg:flex justify-end w-full mb-2 space-x-1">
+            <div className="hidden md:flex justify-end w-full mb-2 space-x-1">
                 <button
                     ref={leftScrollButtonRef}
                     onClick={scrollToLeft}
