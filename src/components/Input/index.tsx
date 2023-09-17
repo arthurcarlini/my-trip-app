@@ -23,6 +23,7 @@ export default function Input({ show, setShow }: Input) {
 
     const handleClick = () => {
         router.push(`/place?origin=${origin.placeId}&destination=${destination.placeId}`)
+        setShow(false)
     }
 
     if (show) {

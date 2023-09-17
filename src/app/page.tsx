@@ -1,17 +1,9 @@
-"use client"
-import { useState } from "react"
-
 import Image from "next/image"
 import homeImage from "../../public/home-image.jpg"
 
-import Input from "@/components/Input"
-
 export default function Home() {
-  const [show, setShow] = useState(false)
-
   return (
     <>
-      <Input show={show} setShow={setShow} />
       <div className="relative h-[calc(100vh-64px)]">
         <Image
           src={homeImage}
@@ -32,7 +24,7 @@ export default function Home() {
         </div>
 
         <div className="absolute inset-x-0 bottom-5 mx-5 flex items-center justify-center">
-          <button onClick={() => setShow(true)} className="bg-amber-900 text-white w-80 h-10 rounded-md">
+          <button className="bg-amber-900 text-white w-80 h-10 rounded-md">
             Começar
           </button>
         </div>
