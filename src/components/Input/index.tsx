@@ -2,8 +2,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import InputTextField from "./autocompleteInput"
-import { SearchRoundedIcon, ArrowBackIcon } from "../ui/icons"
-
+import { SearchRoundedIcon, CloseIcon } from "../ui/icons"
 
 interface Input {
     show: boolean
@@ -31,13 +30,13 @@ export default function Input({ show, setShow }: Input) {
     } else document.body.style.overflow = "auto"
 
     return (
-        <>
-            <div className={`${show ? "block" : "hidden"} fixed inset-0 p-5 z-10 overflow-hidden bg-white`}>
+        <div className={`${show ? "block" : "hidden"} fixed inset-0 lg:p-40 z-10 bg-transparent backdrop-blur-md`}>
+            <div className="h-full lg:h-auto p-5 bg-white rounded-lg">
                 <div className="flex justify-between">
                     <button
                         className="h-10"
                         onClick={() => setShow(false)}>
-                        <ArrowBackIcon />
+                        <CloseIcon />
                     </button>
                     <button
                         className="h-10"
@@ -56,12 +55,6 @@ export default function Input({ show, setShow }: Input) {
                         placeholder="Destino" />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
-
-
-// telas maiores
-{/* <div className="w-11/12 lg:w-4/5 xl:w-1/2 h-14 md:h-20 rounded-xl top-7 lg:top-auto lg:-bottom-10 flex items-center bg-white shadow">
-</div> */}
-{/* <button onClick={handleClick} className="hidden lg:block w-16 md:w-20 lg:w-28 h-10 md:h-14 mx-3 rounded-xl bg-blue-500 text-white lg:text-xl">Buscar</button> */ }
