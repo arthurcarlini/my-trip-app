@@ -8,6 +8,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined'
 import StarRateIcon from '@mui/icons-material/StarRate'
+import CloseIcon from '@mui/icons-material/Close';
 
 export {
     MenuRoundedIcon,
@@ -17,5 +18,6 @@ export {
     SearchRoundedIcon,
     ArrowBackIcon,
     RoomOutlinedIcon,
-    StarRateIcon
+    StarRateIcon,
+    CloseIcon
 }
