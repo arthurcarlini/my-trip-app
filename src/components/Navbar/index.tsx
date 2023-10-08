@@ -23,18 +23,14 @@ export default function Navbar() {
                 </ul>
 
                 <Input show={show} setShow={setShow} />
-
-                <div className="flex items-center">
-                    <button
-                        onClick={() => setShow(true)}
-                        className="w-10 h-10">
-                        <SearchRoundedIcon />
-                    </button>
-
-                    <button className="w-10 h-10 lg:hidden">
-                        <MenuRoundedIcon className="text-3xl md:text-4xl" />
-                    </button>
-                </div>
+                <button
+                    onClick={() => setShow(true)}
+                    className="w-1/2 max-w-sm h-10 p-2 grid border border-neutral-300 shadow rounded-full">
+                    <SearchRoundedIcon className="justify-self-end" />
+                </button>
+                <button className="w-10 h-10 lg:hidden">
+                    <MenuRoundedIcon className="text-3xl md:text-4xl" />
+                </button>
             </nav>
         </div>
     )
