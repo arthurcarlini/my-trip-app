@@ -48,7 +48,7 @@ export default function InputTextField({ placeholder, setPlaceDetails }: Destina
         <input
             ref={inputRef}
             placeholder={placeholder}
-            className="w-full focus:outline-none"
+            className="w-full h-10 p-2 mb-2 transition-color focus:outline-none border border-neutral-400 focus:border-amber-800 focus:ring-1 focus:ring-amber-800 rounded-md"
             type="text"
         />
     )

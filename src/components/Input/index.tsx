@@ -30,7 +30,7 @@ export default function Input({ show, setShow }: Input) {
     } else document.body.style.overflow = "auto"
 
     return (
-        <div className={`${show ? "block" : "hidden"} fixed inset-0 lg:p-40 z-10 bg-transparent backdrop-blur-md`}>
+        <div className={`${show ? "block" : "hidden"} fixed inset-0 lg:px-96 lg:py-40 bg-transparent backdrop-blur-md`}>
             <div className="h-full lg:h-auto p-5 bg-white rounded-lg">
                 <div className="flex justify-between">
                     <button
@@ -44,16 +44,17 @@ export default function Input({ show, setShow }: Input) {
                         <SearchRoundedIcon />
                     </button>
                 </div>
-                <div className="h-10 p-2 mb-2 border border-neutral-500 rounded-md">
-                    <InputTextField
-                        setPlaceDetails={setOrigin}
-                        placeholder="Origem" />
-                </div>
-                <div className="h-10 p-2 mb-2 border border-neutral-500 rounded-md">
-                    <InputTextField
-                        setPlaceDetails={setDestination}
-                        placeholder="Destino" />
-                </div>
+                <InputTextField
+                    setPlaceDetails={setOrigin}
+                    placeholder="Origem" />
+                <InputTextField
+                    setPlaceDetails={setDestination}
+                    placeholder="Destino" />
+                <button
+                    className="w-20 h-10 p-2 transition-colors border border-neutral-400 hover:border-neutral-500 rounded-md"
+                    onClick={handleClick}>
+                    Buscar
+                </button>
             </div>
         </div>
     )
