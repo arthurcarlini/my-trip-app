@@ -202,7 +202,7 @@ export default function Page() {
 
             <div className="px-2 lg:px-12">
                 <div className="flex justify-center">
-                    {/* <Map origin={originPlaceId} destination={destinationPlaceId} /> */}
+                    <Map origin={originPlaceId} destination={destinationPlaceId} />
                 </div>
             </div>
 
