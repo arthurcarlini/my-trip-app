@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 
 import CityResume from "@/components/CityResume"
-import Map from "@/components/Map"
+import Map from "../../components/map"
 import { Carousel } from "@/components/Carousel"
 import Modal from "@/components/Modal"
 
