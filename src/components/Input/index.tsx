@@ -27,7 +27,9 @@ export default function Input({ show, setShow }: Input) {
 
     if (show) {
         document.body.style.overflow = "hidden"
-    } else document.body.style.overflow = "auto"
+    } else {
+        document.body.style.overflow = "auto"
+    }
 
     return (
         <div className={`${show ? "block" : "hidden"} fixed inset-0 lg:px-96 lg:py-40 bg-transparent backdrop-blur-md`}>
