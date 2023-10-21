@@ -30,7 +30,7 @@ export default function Map({ origin, destination }: Map) {
 
     return (
         <>
-            <div ref={containerRef} className="w-full lg:w-2/3 h-60 md:h-72 lg:h-96 rounded-md flex justify-center relative" />
+            <div ref={containerRef} className="flex-none w-full md:w-80 h-60 md:h-72 lg:h-96 rounded-md" />
             {map && routes && <RenderRoutes map={map} routes={routes} />}
         </>
     )
