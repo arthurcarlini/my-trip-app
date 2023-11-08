@@ -14,23 +14,22 @@ interface LinkType {
 
 export default function NavigationLink({ navLinks }: NavigationLinkProps) {
     const pathname = usePathname()
+
     return (
         <>
             {navLinks.map((link: LinkType) => {
                 const isActive = pathname === link.href
 
-                const activeStyle = "font-bold text-black transition-colors hover:text-black border-b-2 border-b-blue-500"
-                const disableStyle = "font-bold text-neutral-500 transition-colors hover:text-black"
                 return (
-                    <Link
-                        className={isActive ? activeStyle : disableStyle}
-                        href={link.href}
-                        key={link.name}
-                    >
-                        <li>
+                    <li key={link.name}>
+                        <Link
+                            className={`font-bold transition-colors hover:text-black 
+                            ${isActive ? "border-b-2 border-b-blue-500" : "text-neutral-500 hover:text-black"}`}
+                            href={link.href}
+                        >
                             {link.name}
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                 )
             })}
         </>

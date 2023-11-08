@@ -30,9 +30,11 @@ export default function RootLayout({
       <body>
         <ApiProvider>
           <Navbar />
-          {children}
+          <main>
+            {children}
+          </main>
         </ApiProvider>
       </body>
-    </html >
+    </html>
   )
 }
