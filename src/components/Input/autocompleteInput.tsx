@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 
 interface DestinationInputType {
+    label: string
     placeholder: string
     setPlaceDetails: (value: {
         placeId: string | undefined
@@ -10,7 +11,7 @@ interface DestinationInputType {
     }) => void
 }
 
-export default function InputTextField({ placeholder, setPlaceDetails }: DestinationInputType) {
+export default function InputTextField({ label, placeholder, setPlaceDetails }: DestinationInputType) {
     const inputRef = useRef<HTMLInputElement>(null)
     const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
 
@@ -45,11 +46,15 @@ export default function InputTextField({ placeholder, setPlaceDetails }: Destina
     }, [setPlaceDetails])
 
     return (
-        <input
-            ref={inputRef}
-            placeholder={placeholder}
-            className="w-full h-10 p-2 mb-2 transition-color focus:outline-none border border-neutral-400 focus:border-amber-800 focus:ring-1 focus:ring-amber-800 rounded-md"
-            type="text"
-        />
+        <label>
+            {label}
+            <input
+                className="w-full h-10 p-2 mb-2 transition-color focus:outline-none border border-neutral-400 focus:border-amber-800 focus:ring-1 focus:ring-amber-800 rounded-md"
+                ref={inputRef}
+                placeholder={placeholder}
+                type="text"
+                required
+            />
+        </label>
     )
 }

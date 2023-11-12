@@ -1,6 +1,8 @@
 "use client"
-import { useState } from "react"
+import { useState, FormEvent } from "react"
+
 import { useRouter } from "next/navigation"
+
 import InputTextField from "./autocompleteInput"
 import { SearchRoundedIcon, CloseIcon } from "../ui/icons"
 
@@ -20,9 +22,10 @@ export default function Input({ show, setShow }: Input) {
 
     const router = useRouter()
 
-    const handleClick = () => {
-        router.push(`/place?origin=${origin.placeId}&destination=${destination.placeId}`)
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault()
         setShow(false)
+        router.push(`/place?origin=${origin.placeId}&destination=${destination.placeId}`)
     }
 
     if (show) {
@@ -34,29 +37,29 @@ export default function Input({ show, setShow }: Input) {
     return (
         <div className={`${show ? "block" : "hidden"} fixed inset-0 lg:px-96 lg:py-40 bg-transparent backdrop-blur-md`}>
             <div className="h-full lg:h-auto p-5 bg-white rounded-lg">
-                <div className="flex justify-between">
-                    <button
-                        className="h-10"
-                        onClick={() => setShow(false)}>
-                        <CloseIcon />
-                    </button>
-                    <button
-                        className="h-10"
-                        onClick={handleClick}>
-                        <SearchRoundedIcon />
-                    </button>
-                </div>
-                <InputTextField
-                    setPlaceDetails={setOrigin}
-                    placeholder="Origem" />
-                <InputTextField
-                    setPlaceDetails={setDestination}
-                    placeholder="Destino" />
                 <button
-                    className="w-20 h-10 p-2 transition-colors border border-neutral-400 hover:border-neutral-500 rounded-md"
-                    onClick={handleClick}>
-                    Buscar
+                    className="h-10"
+                    onClick={() => setShow(false)}>
+                    <CloseIcon />
                 </button>
+
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <InputTextField
+                        label="Origem"
+                        placeholder="New York, USA"
+                        setPlaceDetails={setOrigin}
+                    />
+
+                    <InputTextField
+                        label="Destino"
+                        placeholder="Washington, USA"
+                        setPlaceDetails={setDestination}
+                    />
+
+                    <button className="w-20 h-10 p-2 transition-colors border border-neutral-400 hover:border-neutral-500 rounded-md">
+                        Buscar
+                    </button>
+                </form>
             </div>
         </div>
     )
