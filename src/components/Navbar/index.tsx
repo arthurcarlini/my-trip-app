@@ -5,6 +5,7 @@ import Link from "next/link"
 import { MenuRoundedIcon, SearchRoundedIcon } from "@/components/ui/icons"
 import NavigationLink from "@/components/Navbar/navigationLink"
 import Input from "../Input"
+import Modal from "../Modal"
 
 export default function Navbar() {
     const [show, setShow] = useState(false)
@@ -23,12 +24,18 @@ export default function Navbar() {
                 </ul>
             </nav>
 
-            <Input show={show} setShow={setShow} />
             <button
                 onClick={() => setShow(true)}
                 className="w-1/2 max-w-sm h-10 p-2 grid border border-neutral-300 shadow rounded-full">
                 <SearchRoundedIcon className="justify-self-end" />
             </button>
+
+            <Modal
+                show={show}
+                setShow={setShow}
+                title="Onde gostaria de conhecer?">
+                <Input setShow={setShow} />
+            </Modal>
 
             <button className="w-10 h-10 lg:hidden">
                 <MenuRoundedIcon className="text-3xl md:text-4xl" />
