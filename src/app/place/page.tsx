@@ -10,6 +10,7 @@ import ImagesGrid from "@/components/ImagesGrid"
 import PlacesCarousel from "@/components/PlacesCarousel"
 
 export default function Page() {
+
     const [originPlaceId, setOriginPlaceId] = useState("")
     const [destinationPlaceId, setDestinationPlaceId] = useState("")
 
@@ -79,13 +80,10 @@ export default function Page() {
             }
 
             <div className="w-full p-2 lg:px-12 flex flex-col justify-center items-center md:flex-row">
-                <div className="lg:w-1/3 md:mr-20">
+                <div className="lg:w-1/2 md:mr-20">
                     <h2 className="font-semibold text-2xl mb-2">
                         Sobre o local
                     </h2>
-                    <p>
-                        Redondo Beach, na Califórnia, é uma charmosa cidade costeira conhecida por suas belas praias, clima agradável e estilo de vida descontraído. As praias, atividades aquáticas, clima ameno e uma comunidade acolhedora são os destaques dessa encantadora cidade. É um destino popular para quem busca a vida à beira-mar e atividades ao ar livre.
-                    </p>
                 </div>
                 <Map origin={originPlaceId} destination={destinationPlaceId} />
             </div>
@@ -93,24 +91,18 @@ export default function Page() {
             {placeServiceRef.current &&
                 <>
                     <PlacesCarousel
-                        placeService={placeServiceRef.current}
-                        address={placeAddress}
                         query="tourist attractions"
                         title="Pontos turísticos"
                         description="Confira alguns dos pontos turísticos em seu destino."
                     />
 
                     <PlacesCarousel
-                        placeService={placeServiceRef.current}
-                        address={placeAddress}
                         query="hotels"
                         title="Hotéis"
                         description="Explore uma variedade de opções de hospedagem que irão tornar a sua estadia inesquecível."
                     />
 
                     <PlacesCarousel
-                        placeService={placeServiceRef.current}
-                        address={placeAddress}
                         query="restaurants"
                         title="Restaurantes"
                         description="Aqui estão algumas opções de restaurantes disponíveis em seu destino."
