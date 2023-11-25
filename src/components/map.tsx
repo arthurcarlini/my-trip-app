@@ -1,5 +1,7 @@
 'use client'
 
+import { useSearchParams } from "next/navigation"
+
 import { useRef, useEffect, useState } from "react"
 
 const mapOptions = {
@@ -8,12 +10,11 @@ const mapOptions = {
     disableDefaultUI: true
 }
 
-interface Map {
-    origin: string
-    destination: string
-}
+export default function Map() {
+    const searchParams = useSearchParams()
+    const originPlaceId = searchParams.get("origin")
+    const destinationPlaceId = searchParams.get("destination")
 
-export default function Map({ origin, destination }: Map) {
     const [map, setMap] = useState<google.maps.Map | null>(null)
     const [routes, setRoutes] = useState<google.maps.DirectionsResult | null>(null)
     const containerRef = useRef<HTMLDivElement>(null)
@@ -25,8 +26,10 @@ export default function Map({ origin, destination }: Map) {
     }, [])
 
     useEffect(() => {
-        getRoutes(origin, destination, setRoutes)
-    }, [origin, destination])
+        if (originPlaceId && destinationPlaceId) {
+            getRoutes(originPlaceId, destinationPlaceId, setRoutes)
+        }
+    }, [originPlaceId, destinationPlaceId])
 
     return (
         <>

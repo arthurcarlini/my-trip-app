@@ -1,3 +1,4 @@
+"use client"
 import { useSearchParams } from "next/navigation"
 
 import { useState, useEffect, useRef } from "react"

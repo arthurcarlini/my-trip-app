@@ -1,28 +1,40 @@
+"use client"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import ImagesGridModal from "../ImagesGridModal"
 
-interface ImagesGridType {
-    placeService: google.maps.places.PlacesService
-    destinationPlaceId: string
-}
+export default function ImagesGrid() {
+    const searchParams = useSearchParams()
+    const destinationPlaceId = searchParams.get("destination")
 
-export default function ImagesGrid({ placeService, destinationPlaceId }: ImagesGridType) {
     const [placeAddress, setPlaceAddress] = useState("")
     const [destinationPhotosURLs, setDestinationPhotosURLs] = useState<string[]>([])
     const [isModalOpen, setIsModalOpen] = useState(false)
 
+    const divRef = useRef(null)
+    const placeServiceRef = useRef<null | google.maps.places.PlacesService>()
+
     useEffect(() => {
-        getDestinationPhotos(destinationPlaceId)
-        function getDestinationPhotos(destinationPlaceId: string) {
+        if (!placeServiceRef.current && divRef.current) {
+            placeServiceRef.current = new google.maps.places.PlacesService(divRef.current)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (destinationPlaceId) {
+            getDestinationPhotosFromPlaceId(destinationPlaceId)
+        }
+
+        function getDestinationPhotosFromPlaceId(destinationPlaceId: string) {
             const request = {
                 placeId: destinationPlaceId,
                 fields: ["formatted_address", "photos"]
             }
 
-            placeService.getDetails(request, (res, status) => {
+            placeServiceRef.current?.getDetails(request, (res, status) => {
                 if (status === "OK" && res?.photos && res?.formatted_address) {
                     setPlaceAddress(res.formatted_address)
                     getDestinationPhotoURL(res.photos)
@@ -35,10 +47,11 @@ export default function ImagesGrid({ placeService, destinationPlaceId }: ImagesG
 
             setDestinationPhotosURLs(photosURLs)
         }
-    }, [destinationPlaceId, placeService])
+    }, [destinationPlaceId])
 
     return (
         <>
+            <div ref={divRef}></div>
             <ImagesGridModal
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}

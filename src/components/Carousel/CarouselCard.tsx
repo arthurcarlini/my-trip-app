@@ -26,7 +26,7 @@ export default function Card({ placeName, placeAddress, photo, rating }: Card) {
                     {rating}
                 </div>
             </div>
-            <div className="absolute right-0 left-0 bottom-2 mx-2 p-2 bg-neutral-500 bg-opacity-70 rounded-md">
+            <div className="absolute right-0 left-0 bottom-2 mx-2 p-2 bg-neutral-500 bg-opacity-70 rounded-md truncate">
                 <span className="font-bold md:text-lg">
                     {placeName}
                 </span>
