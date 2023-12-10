@@ -2,21 +2,18 @@ import CityResume from "@/components/CityResume"
 import Map from "../../components/map"
 import ImagesGrid from "@/components/ImagesGrid"
 import PlacesCarousel from "@/components/PlacesCarousel"
+import PlaceDescription from "@/components/PlaceDescription"
 
 export default function Page() {
 
     return (
-        <main>
+        <>
             <CityResume />
 
             <ImagesGrid />
 
             <div className="w-full p-2 lg:px-12 flex flex-col justify-center items-center md:flex-row">
-                <div className="lg:w-1/2 md:mr-20">
-                    <h2 className="font-semibold text-2xl mb-2">
-                        Sobre o local
-                    </h2>
-                </div>
+                <PlaceDescription />
                 <Map />
             </div>
 
@@ -37,6 +34,6 @@ export default function Page() {
                 title="Restaurantes"
                 description="Aqui estão algumas opções de restaurantes disponíveis em seu destino."
             />
-        </main>
+        </>
     )
 }
