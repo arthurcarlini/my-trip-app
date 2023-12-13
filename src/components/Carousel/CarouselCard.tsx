@@ -9,15 +9,13 @@ import CarouselCardSkeleton from "./CarouselCardSkeleton"
 
 interface Card {
     placeName: string | undefined
-    placeAddress: string | undefined
     photo: string | undefined
     rating: number | undefined
 }
 
-export default function Card({ placeName, placeAddress, photo, rating }: Card) {
+export default function Card({ placeName, photo, rating }: Card) {
 
     const [isImageLoading, setIsImageLoading] = useState(true)
-    console.log(isImageLoading)
 
     return (
         <a href="#" className="relative flex-none rounded-md w-56 md:w-64 h-60 md:h-72 mx-1 text-white hover:brightness-50 transition-all">

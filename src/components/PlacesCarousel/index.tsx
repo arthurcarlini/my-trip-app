@@ -8,7 +8,6 @@ import { Carousel } from "@/components/Carousel"
 interface Place {
     id: string | undefined
     name: string | undefined
-    address: string | undefined
     photos: string | undefined
     rating: number | undefined
 }
@@ -68,7 +67,6 @@ export default function PlacesCarousel({ query, title, description }: PlacesCaro
                             return {
                                 id: place.place_id,
                                 name: place.name,
-                                address: place.formatted_address,
                                 photos: place.photos?.[0].getUrl(),
                                 rating: place.rating
                             }
@@ -93,7 +91,6 @@ export default function PlacesCarousel({ query, title, description }: PlacesCaro
                         <Carousel.Card
                             key={place.id}
                             placeName={place.name}
-                            placeAddress={place.address}
                             photo={place.photos}
                             rating={place.rating} />
                     ))}
