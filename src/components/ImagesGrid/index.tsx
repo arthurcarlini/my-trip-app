@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 
 import ImagesGridModal from "../ImagesGridModal"
+import GridImageSkeleton from "./ImagesGridSkeleton"
 
 export default function ImagesGrid() {
     const searchParams = useSearchParams()
@@ -49,6 +50,8 @@ export default function ImagesGrid() {
         }
     }, [destinationPlaceId])
 
+    const [isLoading, setIsLoading] = useState(true)
+
     return (
         <>
             <div ref={divRef}></div>
@@ -59,7 +62,8 @@ export default function ImagesGrid() {
                 placeAddress={placeAddress}
             />
 
-            <div className="relative grid grid-cols-2 grid-rows-2 gap-0.5 h-96">
+            {isLoading && <GridImageSkeleton />}
+            <div onLoad={() => setIsLoading(false)} className="relative grid grid-cols-2 grid-rows-2 gap-0.5 h-96">
                 <div className="relative col-span-2 lg:col-span-1 lg:row-span-2">
                     <Image
                         src={destinationPhotosURLs[0]}
@@ -67,7 +71,8 @@ export default function ImagesGrid() {
                         priority
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover" />
+                        className="object-cover"
+                    />
                 </div>
                 <div className="relative">
                     <Image
@@ -76,7 +81,8 @@ export default function ImagesGrid() {
                         priority
                         fill
                         sizes="50vw"
-                        className="object-cover" />
+                        className="object-cover"
+                    />
                 </div>
                 <div className="relative">
                     <Image
@@ -85,7 +91,8 @@ export default function ImagesGrid() {
                         priority
                         fill
                         sizes="50vw"
-                        className="object-cover" />
+                        className="object-cover"
+                    />
                 </div>
                 <button
                     className="absolute bottom-4 right-2 lg:right-12 w-16 lg:w-20 h-10 text-sm bg-black text-white hover:brightness-75 rounded-full"
