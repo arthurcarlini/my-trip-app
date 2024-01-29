@@ -5,12 +5,10 @@
 MyTrip é uma aplicação que visa fornecer informações sobre o destino de viajem dos usuários, por exemplo, rotas, hotéis, restaurantes e pontos turísticos provenientes da api do Google Places.
 
 ## Funcionalidades
-
-Legenda: ✅: Implementada ❗: Parcialmente implementada ❌: Não implementada
-- Rota: Exibe a rota para o destino especificado. ✅
-- Hotéis: Fornece alguns dos hotéis disponíveis no destino com a localização e avaliação.❗
-- Restaurantes: Fornece alguns dos restaurantes disponíveis no destino com a localização e avaliação.❗
-- Pontos turísticos: Exibe os principais pontos de atrações com uma pequena descrição sobre o local usando chatGPT.❗
+- Rota: Exibe a rota para o destino especificado.
+- Hotéis: Fornece alguns dos hotéis disponíveis no destino e avaliação.
+- Restaurantes: Fornece alguns dos restaurantes disponíveis no destino e avaliação.
+- Pontos turísticos: Exibe os principais pontos de atrações.
 
 ## Frameworks \ Bibliotecas
 
