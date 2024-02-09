@@ -20,7 +20,7 @@ export default function Navbar() {
 
             <nav>
                 <ul className="hidden lg:flex justify-center space-x-7">
-                    <NavigationLink navLinks={[{ href: "/", name: "Início" }, { href: "/about", name: "Sobre" }]} />
+                    <NavigationLink navLinks={[{ href: "/", name: "Início" }]} />
                 </ul>
             </nav>
 
